@@ -188,7 +188,7 @@ while read theme_apps; do
   echo "Disabling::  $theme_apps..." | tee -a "$output_file"
   echo $key | sudo -S apt install -y "$theme_apps" &>/dev/null | tee -a "$output_file"
   echo "$theme_apps installed successfully." | tee -a "$output_file"
-done < disableservices.txt
+done < csi_linux_themes.txt
 
 
 
