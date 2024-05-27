@@ -190,7 +190,7 @@ echo "# Configuring Background"	| tee -a "$output_file"
 update_xfce_wallpapers "/opt/csitools/wallpaper/CSI-Linux-Dark.jpg"  	
   echo "Doing Grub stuff..."
     ### COMMAND NOT FOUND - another dependency        
-    echo $key | sudo -S "/sbin/modprobe zfs"
+    echo $key | sudo -S "/usr/sbin/modprobe zfs"
 
 if echo $key | sudo -S grep -q "GRUB_DISABLE_OS_PROBER=false" /etc/default/grub; then		    
     echo $key | sudo -S sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub		    
