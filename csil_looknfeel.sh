@@ -168,18 +168,18 @@ reset_DNS() {
 
 cd /tmp
     ##WHERE TO STORE BACKUP
-		backup_dirct= $(pwd -P)
+    backup_dirct= $(pwd -P)
     ###NAME OF THE BACKUP
-		backup_file_namect="csitools_theme"
+    backup_file_namect="csitools_theme"
     ###PARSED PATH AND FILE NAME
-		archive_pathct="$backup_dirct/$backup_file_namect.7z"
+    archive_pathct="$backup_dirct/$backup_file_namect.7z"
 		
     ###SET THESE COMMANDS AS NON_INTERACTIVE
     echo "$key" | sudo -S DEBIAN_FRONTEND=noninteractive apt install aria2 -y &>/dev/null
 		
     ###CREATE FOLDER FOR DOWNLOAD BY REMOVING AND RECREATING
     echo "Preparing for the CSI Theme download..."  | tee -a "$output_file"
-		#echo "$key" | sudo -S rm -rf "$backup_dirct" # Remove the entire backup directory		
+    #echo "$key" | sudo -S rm -rf "$backup_dirct" # Remove the entire backup directory		
     #echo "$key" | sudo -S mkdir -p "$backup_dirct"
     #echo "$key" | sudo -S chmod 777 "$backup_dirct" # Set full permissions temporarily for download
 		
@@ -196,17 +196,17 @@ cd /tmp
 			echo "# Installing the CSI Theme..."  | tee -a "$output_file"
 		
     	if restore_backup_to_root "$backup_dirct" "$backup_file_namect"; then
-			    echo "The CSI Theme restored successfully." | tee -a "$output_file"
-			    echo "Setting permissions and configurations for the CSI Theme..." | tee -a "$output_file"
-			    echo "$key" | sudo -S chown csi:csi -R /home/csi/ | tee -a "$output_file"			    
-          echo "The CSI Theme installation and configuration completed successfully." | tee -a "$output_file"
-			else
-			    echo "Failed to restore the CSI Theme from the backup." | tee -a "$output_file"
-			fi
-			else
-			echo "Failed to download CSI Tools." | tee -a "$output_file"
-			return 1  # Download failed
-		fi
+     	    echo "The CSI Theme restored successfully." | tee -a "$output_file"
+	    echo "Setting permissions and configurations for the CSI Theme..." | tee -a "$output_file"
+	    echo "$key" | sudo -S chown csi:csi -R /home/csi/ | tee -a "$output_file"			    
+            echo "The CSI Theme installation and configuration completed successfully." | tee -a "$output_file"
+	else
+	    echo "Failed to restore the CSI Theme from the backup." | tee -a "$output_file"
+	fi
+	#else
+	echo "Failed to download CSI Tools." | tee -a "$output_file"
+	#return 1  # Download failed
+		#fi
   
 		#rm csi_linux_themes.txt &>/dev/null | tee -a "$output_file"
 		
