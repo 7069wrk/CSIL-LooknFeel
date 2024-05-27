@@ -111,7 +111,7 @@ echo $key | sudo -S apt install --fix-broken
       else
           echo "FAILED" | tee -a "$output_file"
           ((failed++))
-          echo "$package" >> /opt/csitools/apt-failed.txt
+          echo "$package" | tee -a "$output_file"
       fi
   done
 
@@ -182,6 +182,7 @@ restore_backup_to_root "$backup_dirct" "$backup_file_name"
 echo "# Installing the CSI Theme..."  | tee -a "$output_file"
 dos2unix csi_linux_themes.txt  | tee -a "$output_file"		
   mapfile -t csi_linux_themes < <(grep -vE "^\s*#|^$" csi_linux_themes.txt | sed -e 's/#.*//')
+echo "$csi_linux_themes"
 
 install_packages csi_linux_themes
   # installed_packages_desc csi_linux_themes
