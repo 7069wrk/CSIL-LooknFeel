@@ -166,7 +166,7 @@ reset_DNS() {
 }
 
 
-cd /tmp
+#cd /tmp
     ##WHERE TO STORE BACKUP
     backup_dirct= $(pwd -P)
     ###NAME OF THE BACKUP
