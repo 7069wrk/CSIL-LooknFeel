@@ -111,7 +111,7 @@ install_packages() {
         else
             echo "FAILED" | tee -a "$output_file"
             ((failed++))
-            echo "$package" >> /opt/csitools/apt-failed.txt
+            #echo "$package" >> /opt/csitools/apt-failed.txt
         fi
     done
 
@@ -168,7 +168,7 @@ reset_DNS() {
 
 #cd /tmp
     ##WHERE TO STORE BACKUP
-    backup_dirct= $(pwd -P)
+    backup_dirct="CSIL_LooknFeel" #$(pwd -P)
     ###NAME OF THE BACKUP
     backup_file_namect="csitools_theme"
     ###PARSED PATH AND FILE NAME
