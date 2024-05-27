@@ -18,6 +18,7 @@ restore_backup_to_root() {
     local backup_dir=$1
     local backup_file_name=$2
     local archive_path="$backup_dir/$backup_file_name.7z"
+    echo "7z file ${archive_path}"
 
     echo "Restoring CSI Tools backup..."
     # Extract the .7z file safely and ensure files are overwritten without prompting
@@ -27,8 +28,9 @@ restore_backup_to_root() {
     #    return 1  # Exit the function with an error status
     #fi
     echo $key | sudo -S 7z x -aoa "$backup_file_name.7z"
-
+    
     local tar_file="$backup_dir/$backup_file_name.tar"
+      echo "7z file ${tar_path}"
     if [ -f "$tar_file" ]; then
         echo "Restoring backup from tar file..."  | tee -a "$output_file"
         # Extract the tar file and ensure files are overwritten without prompting
