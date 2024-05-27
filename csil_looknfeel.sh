@@ -21,7 +21,8 @@ restore_backup_to_root() {
 
     echo "Restoring CSI Tools backup..."
     # Extract the .7z file safely and ensure files are overwritten without prompting
-    if ! echo $key | sudo -S 7z x -aoa -o "$backup_file_name" "$archive_path"; then
+    #if ! echo $key | sudo -S 7z x -aoa -o "$backup_file_name" "$archive_path"; then
+    if ! echo $key | sudo -S 7z x -aoa -o "$backup_file_name"; then
         echo "Failed to extract $archive_path. Please check the file and try again." | tee -a "$output_file"
         return 1  # Exit the function with an error status
     fi
