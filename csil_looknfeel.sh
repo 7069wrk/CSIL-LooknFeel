@@ -21,7 +21,7 @@ restore_backup_to_root() {
 
     echo "Restoring CSI Tools backup..."
     # Extract the .7z file safely and ensure files are overwritten without prompting
-    if ! echo $key | sudo -S 7z x -aoa -o"$backup_dir" "$archive_path"; then
+    if ! echo $key | sudo -S 7z x -aoa -o "$backup_file_name" "$archive_path"; then
         echo "Failed to extract $archive_path. Please check the file and try again." | tee -a "$output_file"
         return 1  # Exit the function with an error status
     fi
@@ -168,7 +168,7 @@ reset_DNS() {
 
 #cd /tmp
     ##WHERE TO STORE BACKUP
-    backup_dirct="CSIL_LooknFeel" #$(pwd -P)
+    backup_dirct="CSIL-LooknFeel" #$(pwd -P)
     ###NAME OF THE BACKUP
     backup_file_namect="csitools_theme"
     ###PARSED PATH AND FILE NAME
