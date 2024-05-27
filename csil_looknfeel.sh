@@ -1,4 +1,4 @@
-#!/bin/bash
+ho#!/bin/bash
 
 # GET SUDO
 echo "Please enter your sudo password:"
@@ -180,7 +180,7 @@ restore_backup_to_root "$backup_dirct" "$backup_file_name"
 
 
 echo "# Installing the CSI Theme..."  | tee -a "$output_file"
-dos2unix csi_linux_themes.txt  | tee -a "$output_file"		
+echo $key | sudo -Sdos2unix csi_linux_themes.txt  | tee -a "$output_file"		
   mapfile -t csi_linux_themes < <(grep -vE "^\s*#|^$" csi_linux_themes.txt | sed -e 's/#.*//')
 echo "$csi_linux_themes"
 
