@@ -6,7 +6,7 @@ read -s key
 
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-output_file="/tmp/csil_themes-$timestamp.log"
+output_file="csil_themes-$timestamp.log"
 ### | tee -a "$output_file"
 
 #./restore_backup_to_root
