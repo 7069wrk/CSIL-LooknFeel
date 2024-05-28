@@ -1,4 +1,4 @@
-ho#!/bin/bash
+#!/bin/bash
 
 # GET SUDO
 echo "Please enter your sudo password:"
@@ -9,13 +9,14 @@ timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="/tmp/csil_themes-$timestamp.log"
 ### | tee -a "$output_file"
 
-./restore_backup_to_root
-
-./update_xfce_wallpapers
-
-./install_packages
-
-./reset_DNS
+#./restore_backup_to_root
+source restore_backup_to_root
+#./update_xfce_wallpapers
+source update_xfce_wallpapers
+#./install_packages
+source install_packages
+#./reset_DNS
+source reset_DNS
 
 
 #cd /tmp << NOT NEEDED when cloning from github
