@@ -198,7 +198,7 @@ reset_DNS
 echo "# Configuring Background"	| tee -a "$output_file"
 update_xfce_wallpapers "/opt/csitools/wallpaper/CSI-Linux-Dark.jpg"  	
   echo "Doing Grub stuff..."
-    ### COMMAND NOT FOUND - another dependency        
+    echo $key | sudo -S rm /etc/alternatives/default.plymouth
     echo $key | sudo -S /sbin/modprobe zfs
 
 if echo $key | sudo -S grep -q "GRUB_DISABLE_OS_PROBER=false" /etc/default/grub; then		    
