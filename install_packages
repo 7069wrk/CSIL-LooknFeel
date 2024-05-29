@@ -1,0 +1,53 @@
+install_packages() {
+  local -n packages=$1
+  local newpackages=()
+  local already_installed=0
+  local installed=0
+  local failed=0
+  local total_packages=${#packages[@]}
+  local current_package=0
+  
+  echo "Checking which packages need installation..." | tee -a "$output_file"
+
+  # Pre-check installed status to avoid unnecessary operations
+  for package in "${packages[@]}"; do
+      let current_package++
+      if dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q "install ok installed"; then
+          # echo "[$current_package/$total_packages] Package $package is already installed, skipping."
+          ((already_installed++))
+      else
+          newpackages+=("$package")
+      fi
+  done
+
+  echo "Out of $total_packages packages, $already_installed are already installed." | tee -a "$output_file"
+  
+  local new_total=${#newpackages[@]}
+  if [ "$new_total" -eq 0 ]; then
+      echo "No new packages to install."
+      return
+  fi
+
+  echo "Starting installation of $new_total new packages..." | tee -a "$output_file"
+  current_package=0
+
+  for package in "${newpackages[@]}"; do
+      let current_package++
+      echo -n "[$current_package/$new_total] Installing $package... " | tee -a "$output_file"
+echo $key | sudo -S apt install --fix-broken
+      if echo $key | sudo -S -E DEBIAN_FRONTEND=noninteractive apt-get install -yq --assume-yes "$package"; then
+          echo "SUCCESS" | tee -a "$output_file"
+          ((installed++))
+      else
+          echo "FAILED" | tee -a "$output_file"
+          ((failed++))
+          echo "$package" | tee -a "$output_file"
+      fi
+  done
+
+  echo -e "\nInstallation complete." | tee -a "$output_file"
+  echo "Summary: $already_installed skipped, $installed installed, $failed failed." | tee -a "$output_file"
+  if [ $failed -gt 0 ]; then
+      echo "Details of failed installations have been logged to /opt/csitools/apt-failed.txt." | tee -a "$output_file"
+  fi
+}
