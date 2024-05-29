@@ -38,7 +38,7 @@ echo "# Installing the CSI Theme..."  | tee -a "$output_file"
 #  mapfile -t csi_linux_themes < <(grep -vE "^\s*#|^$" csi_linux_themes.txt | sed -e 's/#.*//')
 
 while read theme_apps; do
-  echo "Disabling::  $theme_apps..." | tee -a "$output_file"
+  echo "Installing::  $theme_apps..." | tee -a "$output_file"
   echo $key | sudo -S apt install -y "$theme_apps" &>/dev/null | tee -a "$output_file"
   echo "$theme_apps installed successfully." | tee -a "$output_file"
 done < csi_linux_themes.txt
