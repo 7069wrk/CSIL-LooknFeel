@@ -1,0 +1,24 @@
+update_xfce_wallpapers() {
+    local wallpaper_path="$1"  # Use the first argument as the wallpaper path
+    if [[ -z "$wallpaper_path" ]]; then
+        echo "Usage: update_xfce_wallpapers /path/to/your/wallpaper.jpg" | tee -a "$output_file"
+        return 1  # Exit the function if no wallpaper path is provided
+    fi
+    if [ ! -f "$wallpaper_path" ]; then
+        echo "The specified wallpaper file does not exist: $wallpaper_path" | tee -a "$output_file"
+        return 1  # Exit the function if the wallpaper file doesn't exist
+    fi
+    screens=$(xfconf-query -c xfce4-desktop -l | grep -Eo 'screen[^/]+' | uniq)
+    for screen in $screens; do
+        monitors=$(xfconf-query -c xfce4-desktop -l | grep "${screen}/" | grep -Eo 'monitor[^/]+' | uniq)
+        for monitor in $monitors; do
+            workspaces=$(xfconf-query -c xfce4-desktop -l | grep "${screen}/${monitor}/" | grep -Eo 'workspace[^/]+' | uniq)
+            for workspace in $workspaces; do
+                # Construct the property path
+                property_path="/backdrop/${screen}/${monitor}/${workspace}/last-image"
+                echo "Updating wallpaper for ${property_path} to ${wallpaper_path}"
+                xfconf-query -c xfce4-desktop -p "${property_path}" -n -t string -s "${wallpaper_path}"
+            done
+        done
+    done
+}
