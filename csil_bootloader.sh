@@ -25,11 +25,12 @@ backup_dir=$(pwd -P) #"/tmp/restorecsitheme"
 ###NAME OF THE BACKUP
 backup_file_name="csi_boot"
 ###PARSED PATH AND FILE NAME
-backup_archive_path="$backup_dirct/$backup_file_name.7z"
+tar_file="$backup_dirct/$backup_file_name.tar"  ###csi_boot.tar
 
 
 echo "# Restore the backup of CSI Theme..."  | tee -a "$output_file"
-restore_backup_to_root "$backup_dirct" "$backup_file_name"
+#restore_backup_to_root "$backup_dirct" "$backup_file_name"
+echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
 
 echo "# Installing the CSI BOOTLOADER Theme..."  | tee -a "$output_file"
