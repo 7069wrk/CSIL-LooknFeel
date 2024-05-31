@@ -1,4 +1,4 @@
-#!/bin/bash
+ |#!/bin/bash
 
 # GET SUDO
 echo "Please enter your sudo password:"
@@ -9,7 +9,7 @@ timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="csil_vortex-$timestamp.log"
 ### | tee -a "$output_file"
 
-touch "$output_file"
+echo $key | sudo -S touch "$output_file"
 
 echo "Add VORTEX to CSI Theme..." | tee -a "$output_file"
 tar_file="csi_vortex.tar"
