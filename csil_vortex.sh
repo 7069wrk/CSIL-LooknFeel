@@ -1,4 +1,4 @@
- |#!/bin/bash
+#!/bin/bash
 
 # GET SUDO
 echo "Please enter your sudo password:"
