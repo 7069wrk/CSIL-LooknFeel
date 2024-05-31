@@ -9,19 +9,9 @@ timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="/tmp/csil_themes-$timestamp.log"
 ### | tee -a "$output_file"
 
-#./restore_backup_to_root
-source restore_backup_to_root
-#./update_xfce_wallpapers
-source update_xfce_wallpapers
-#./install_packages
-source install_packages
-#./reset_DNS
-source reset_DNS
-
-
 #cd /tmp << NOT NEEDED when cloning from github
 ##WHERE TO STORE BACKUP
-backup_dir=$(pwd -P) #"/tmp/restorecsitheme"
+backup_dir=$(pwd -P)
 ###NAME OF THE BACKUP
 backup_file_name="csi_boot"
 ###PARSED PATH AND FILE NAME
