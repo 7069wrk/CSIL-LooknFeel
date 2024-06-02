@@ -10,7 +10,7 @@ output_file="csil_lightdm-$timestamp.log"
 ### | tee -a "$output_file"
 
 echo "Add LIGHTDM to CSI Theme..." | tee -a "$output_file"
-tar_file="csi_lightdm.tar"
+tar_file="csi_usr.tar"
 echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
 sleep 5
