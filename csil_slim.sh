@@ -10,7 +10,7 @@ output_file="csil_slim-$timestamp.log"
 ### | tee -a "$output_file"
 
 echo "Add LOGIN to CSI Theme..." | tee -a "$output_file"
-tar_file="csi_loooknfeel.tar"
+tar_file="csi_looknfeel.tar"
 echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
 # Check root privileges
