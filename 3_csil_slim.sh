@@ -20,10 +20,10 @@ if [[ $(id -u) != 0 ]] ; then
 fi
 
 # Update package list
-apt update
+#apt update
 
 # Install SLIM
-echo $key | sudo -S apt install -y slim
+#echo $key | sudo -S apt install -y slim
 
 # Backup slim config
 cp -v /etc/slim.conf /etc/slim.conf.org  # -v for verbose output
