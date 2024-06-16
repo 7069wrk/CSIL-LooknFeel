@@ -15,7 +15,9 @@ sudo apt install -y python3 python3-pip python3-venv python3-update-manager
 sudo apt install -y git curl wget
 sudo apt install -y p7zip-full p7zip-rar zip
 sudo apt install -y aria2 bpytop yad zenity dos2unix
+sleep 5
 sudo apt install -y xfce4 xfce4-goodies gvfs-backends
+sleep 5
 sudo apt install -y slim
 
 ### git the repository
