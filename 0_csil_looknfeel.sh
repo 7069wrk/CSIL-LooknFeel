@@ -18,7 +18,7 @@ sudo apt install -y aria2 bpytop yad zenity dos2unix
 sudo apt install -y xfce4 xfce4-goodies gvfs-backends
 
 ### git the repository
-echot $key | sudo -S git clone https://github.com/7069wrk/CSIL-LooknFeel.git
+#echo $key | sudo -S git clone https://github.com/7069wrk/CSIL-LooknFeel.git
 
 ### restore to root
 tar_file="csi_looknfeel.tar"
