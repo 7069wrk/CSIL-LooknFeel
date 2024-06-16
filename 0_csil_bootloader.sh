@@ -10,8 +10,8 @@ output_file="/tmp/csil_themes-$timestamp.log"
 ### | tee -a "$output_file"
 
 echo "# Restore the backup of CSI Theme..." | tee -a "$output_file"
-tar_file="csi_boot.tar"
-echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
+#tar_file="csi_boot.tar"
+#echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
 sleep 5
 echo "# Installing the CSI BOOTLOADER Theme..." | tee -a "$output_file"
