@@ -25,11 +25,11 @@ update_xfce_wallpapers() {
     done
 }
 
-echo "Add VORTEX to CSI Theme..." | tee -a "$output_file"
+echo "Add VORTEX to CSI Theme..." #| tee -a "$output_file"
 #tar_file="csi_wallpaper.tar"
 #echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
 sleep 5
-echo "# Installing the CSI WALLPAPER Theme..." | tee -a "$output_file"
+echo "# Installing the CSI WALLPAPER Theme..." #| tee -a "$output_file"
 
 update_xfce_wallpapers "/opt/csitools/wallpaper/CSI-Linux-Dark.jpg"
