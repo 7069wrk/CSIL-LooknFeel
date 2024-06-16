@@ -31,27 +31,27 @@ fi
 # Define custom configuration content (replace with your actual configuration)
 CUSTOM_CONFIG=$(cat <<EOF
 ### CUSTOM CSIL SLIM.CONF
-default_path  /usr/local/bin:/usr/bin:/bin:/opt/csitools:/opt/csitools/helper:/home/csi/bin:/home/csi/.local/bin:/usr/sbin
-default_xserver  /usr/bin/X11/X
-xserver_arguments  -nolisten tcp
-halt_cmd        /sbin/shutdown -h now
-reboot_cmd      /sbin/shutdown -r now
-console_cmd     /usr/bin/xterm -C -fg white -bg black +sb -T "Console login" -e /bin/sh -c "/bin/cat /etc/issue.net; exec /bin/login"
-xauth_path      /usr/bin/X11/xauth
-authfile        /var/run/slim.auth
-numlock          on
-login_cmd       exec /bin/bash -login /etc/X11/Xsession %session
-sessiondir      /usr/share/xsessions/
-screenshot_cmd  scrot /root/slim.png
-welcome_msg     Welcome to CSI Linux
-shutdown_msg    The system is halting...
-reboot_msg      The system is rebooting...
-default_user     csi
-focus_password  yes
-auto_login       no   
-current_theme    csi2
-lockfile        /var/run/slim.lock
-logfile         /var/log/slim.log
+default_path /usr/local/bin:/usr/bin:/bin:/opt/csitools:/opt/csitools/helper:/home/csi/bin:/home/csi/.local/bin:/usr/sbin
+default_xserver /usr/bin/X11/X
+xserver_arguments -nolisten tcp
+halt_cmd /sbin/shutdown -h now
+reboot_cmd /sbin/shutdown -r now
+console_cmd /usr/bin/xterm -C -fg white -bg black +sb -T "Console login" -e /bin/sh -c "/bin/cat /etc/issue.net; exec /bin/login"
+xauth_path /usr/bin/X11/xauth
+authfile /var/run/slim.auth
+numlock on
+login_cmd exec /bin/bash -login /etc/X11/Xsession %session
+sessiondir /usr/share/xsessions/
+screenshot_cmd scrot /root/slim.png
+welcome_msg Welcome to CSI Linux
+shutdown_msg The system is halting...
+reboot_msg The system is rebooting...
+default_user csi
+focus_password yes
+auto_login no   
+current_theme csi2
+lockfile /var/run/slim.lock
+logfile /var/log/slim.log
 EOF
 )
 
