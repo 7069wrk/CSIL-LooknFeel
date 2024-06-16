@@ -26,7 +26,7 @@ fi
 #echo $key | sudo -S apt install -y slim
 
 # Backup slim config
-cp -v /etc/slim.conf /etc/slim.conf.org  # -v for verbose output
+#cp -v /etc/slim.conf /etc/slim.conf.org  # -v for verbose output
 
 # Define custom configuration content (replace with your actual configuration)
 CUSTOM_CONFIG=$(cat <<EOF
@@ -55,14 +55,24 @@ logfile         /var/log/slim.log
 EOF
 )
 
+
 # Check if custom config content is empty
 if [[ -z "$CUSTOM_CONFIG" ]]; then
   echo "Custom configuration is empty. Please define content."
   exit 1
 fi
 
-# Write custom configuration to a new slim.conf file
-echo "$CUSTOM_CONFIG" > /etc/slim.conf
+# Check if backup file exists
+if [[ -f /etc/slim.conf.org ]]; then
+  # Backup already exists, overwrite slim.conf
+  echo "Existing backup found, overwriting /etc/slim.conf"
+  echo "$CUSTOM_CONFIG" > /etc/slim.conf
+else
+  # No backup found, create a backup before overwriting
+  echo "Creating backup of /etc/slim.conf as /etc/slim.conf.org"
+  cp -v /etc/slim.conf /etc/slim.conf.org
+  echo "$CUSTOM_CONFIG" > /etc/slim.conf
+fi
 
 # Restart SLIM service (optional)
 systemctl restart slim
