@@ -1,8 +1,11 @@
 #!/bin/bash
 
 # GET SUDO
-echo "Please enter your sudo password:"
-read -s key
+#echo "Please enter your sudo password:"
+#read -s key
+
+key = $(cat .passwd)
+echo $key
 
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
