@@ -23,7 +23,7 @@ fi
 apt update
 
 # Install SLIM
-apt install slim -y
+echo $key | sudo -S apt install -y slim
 
 # Backup slim config
 cp -v /etc/slim.conf /etc/slim.conf.org  # -v for verbose output
