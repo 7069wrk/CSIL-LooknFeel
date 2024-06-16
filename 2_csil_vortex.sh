@@ -12,8 +12,8 @@ output_file="csil_vortex-$timestamp.log"
 echo $key | sudo -S touch "$output_file"
 
 echo "Add VORTEX to CSI Theme..." | tee -a "$output_file"
-tar_file="csi_usr.tar"
-echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
+#tar_file="csi_usr.tar"
+#echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
 sleep 5
 echo "# Installing the CSI BOOTLOADER Theme..." | tee -a "$output_file"
