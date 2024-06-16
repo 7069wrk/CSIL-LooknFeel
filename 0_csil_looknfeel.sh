@@ -19,7 +19,7 @@ sudo apt install -y git curl wget
 sudo apt install -y p7zip-full p7zip-rar zip
 sudo apt install -y aria2 bpytop yad zenity dos2unix
 sleep 5
-sudo apt install -y xfce4 xfce4-goodies gvfs-backends
+sudo apt install -y xfce4 xfce4-goodies gvfs-backends dbus-x11
 sleep 5
 sudo apt install -y slim
 
