@@ -36,3 +36,4 @@ update_xfce_wallpapers "/opt/csitools/wallpaper/CSI-Linux-Dark.jpg"
 
 ### single desktop wallpaper
 #gsettings set org.gnome.desktop.background picture-uri file://///opt/csitools/wallpaper/CSI-Linux-Dark.jpg  
+#gsettings set org.gnome.desktop.background picture-uri file://///opt/csitools/wallpaper/CSI-Linux-Dark-logo.jpg  
