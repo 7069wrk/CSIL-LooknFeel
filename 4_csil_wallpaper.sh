@@ -33,3 +33,6 @@ sleep 5
 echo "# Installing the CSI WALLPAPER Theme..." #| tee -a "$output_file"
 
 update_xfce_wallpapers "/opt/csitools/wallpaper/CSI-Linux-Dark.jpg"
+
+### single desktop wallpaper
+#gsettings set org.gnome.desktop.background picture-uri file://///opt/csitools/wallpaper/CSI-Linux-Dark.jpg  
