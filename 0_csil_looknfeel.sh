@@ -1,16 +1,19 @@
 #!/bin/bash
 
 # GET SUDO
-#echo "Please enter your sudo password:"
-#read -s key
+echo "Please enter your sudo password:"
+read -s key
 
-key = $(cat .passwd)
-echo $key
+#key = $(cat .passwd)
+#echo $key
 
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="~/csil-looknfeel-$timestamp.log"
 ### | tee -a "$output_file"
+
+### be sure most recent repository cache
+sudo apt update
 
 ### install build dependencies
 echo "Installing VM TOOLS"
