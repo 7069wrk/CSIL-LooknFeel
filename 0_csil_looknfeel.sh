@@ -13,21 +13,29 @@ output_file="~/csil-looknfeel-$timestamp.log"
 ### | tee -a "$output_file"
 
 ### install build dependencies
+echo "Installing VM TOOLS"
 sudo apt install -y open-vm-tools open-vm-tools-desktop
+echo "installing PYTHON STUFF"
 sudo apt install -y python3 python3-pip python3-venv python3-update-manager
+echo "installing FILE TRANSPORTATION"
 sudo apt install -y git curl wget
+echo "installing COMPRESSION UTILITIES"
 sudo apt install -y p7zip-full p7zip-rar zip
+echo "installing UTILS"
 sudo apt install -y aria2 bpytop yad zenity dos2unix
 sleep 5
+echo "installing DESKTOP STUFF"
 #sudo apt install -y xfce4 xfce4-goodies gvfs-backends dbus-x11
 sudo apt install -y tasksel xubuntu-desktop task-xfce-desktop
 sleep 5
+echo "installing SLIM"
 sudo apt install -y slim
 
 ### git the repository
 #echo $key | sudo -S git clone https://github.com/7069wrk/CSIL-LooknFeel.git
 
 ### restore to root
+echo "expanding CSIL ROOT"
 tar_file="csi_looknfeel.tar"
 echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
