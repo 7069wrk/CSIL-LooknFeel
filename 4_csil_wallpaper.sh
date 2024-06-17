@@ -1,5 +1,30 @@
 #!/bin/bash
 
+echo "Add WALLPAPER to CSI Theme..." #| tee -a "$output_file"
+#tar_file="csi_wallpaper.tar"
+#echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
+
+sleep 5
+echo "# Installing the CSI WALLPAPER Theme..." #| tee -a "$output_file"
+
+# Identify Desktop Environment (DE)
+desktop_env=$(echo "${XDG_CURRENT_DESKTOP}") # | tr '[[:upper:]]' '[[:lower:]]')
+wallpaper_path="/opt/csitools/wallpaper/CSI-Linux-Dark-logo.jpg"
+
+# Function to change wallpaper for GNOME
+update_gnome_wallpaper() {
+  echo "inside  GNOME file://$wallpaper_path"
+  gsettings set org.gnome.desktop.background color-shading-type 'solid'
+  gsettings set org.gnome.desktop.background primary-color '#000000'
+  gsettings set org.gnome.desktop.background picture-options 'spanned'
+  gsettings set org.gnome.desktop.background picture-opacity 100
+  gsettings set org.gnome.desktop.background secondary-color '#000000'
+  gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+  gsettings set org.gnome.desktop.background picture-uri "file://${wallpaper_path}"
+  gsettings set org.gnome.desktop.background picture-uri-dark "file://${wallpaper_path}"
+}
+
+# Function to change wallpaper for XFCE (using xfconf-query)
 update_xfce_wallpapers() {
     local wallpaper_path="$1"  # Use the first argument as the wallpaper path
     if [[ -z "$wallpaper_path" ]]; then
@@ -10,6 +35,7 @@ update_xfce_wallpapers() {
         echo "The specified wallpaper file does not exist: $wallpaper_path"
         return 1  # Exit the function if the wallpaper file doesn't exist
     fi
+    xsetroot -solid black
     screens=$(xfconf-query -c xfce4-desktop -l | grep -Eo 'screen[^/]+' | uniq)
     for screen in $screens; do
         monitors=$(xfconf-query -c xfce4-desktop -l | grep "${screen}/" | grep -Eo 'monitor[^/]+' | uniq)
@@ -25,16 +51,17 @@ update_xfce_wallpapers() {
     done
 }
 
-echo "Add VORTEX to CSI Theme..." #| tee -a "$output_file"
-#tar_file="csi_wallpaper.tar"
-#echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
+# Check for GNOME
+if [[ "$desktop_env" == "GNOME" ]]; then
+  echo "Detected GNOME desktop"
+  update_gnome_wallpaper  
 
-sleep 5
-echo "# Installing the CSI WALLPAPER Theme..." #| tee -a "$output_file"
-xsetroot -solid black
-update_xfce_wallpapers "/opt/csitools/wallpaper/CSI-Linux-Dark.jpg"
+# Check for XFCE
+elif [[ "$desktop_env" == "XFCE" ]]; then
+  echo "Detected XFCE desktop"
+  update_xfce_wallpapers "$wallpaper_path"
 
+else
+  echo "Desktop environment not supported: $desktop_env"
+fi
 
-### single desktop wallpaper
-#gsettings set org.gnome.desktop.background picture-uri file://///opt/csitools/wallpaper/CSI-Linux-Dark.jpg  
-#gsettings set org.gnome.desktop.background picture-uri file://///opt/csitools/wallpaper/CSI-Linux-Dark-logo.jpg  
