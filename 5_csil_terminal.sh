@@ -10,7 +10,8 @@ sudo git clone https://github.com/xero/figlet-fonts /usr/share/figlet/fonts
 
 # edit .bashrc
 cd ~/ 
-echo "figlet -f /usr/share/figlet/fonts/Digital -r \"CSI Linux\"" >> ~/.bashrc
+#echo "figlet -f /usr/share/figlet/fonts/Digital -r \"CSI Linux\"" >> ~/.bashrc
+sed -i '$ a figlet -f /usr/share/figlet/fonts/Digital -r "CSI Linux"' ~/.bashrc
 
 # set TERMINAL theme
 # Text color (change '33' for different colors)
