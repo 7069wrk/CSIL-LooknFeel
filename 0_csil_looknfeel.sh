@@ -62,7 +62,8 @@ sudo -S apt install -y libxfce4ui-utils \
     xfce4-terminal \
     xfconf \
     xfdesktop4 \
-    xfwm4
+    xfwm4 \
+    xinit
 sudo -S apt install -y figlet
 sleep 5
 echo "installing SLIM" | tee -a "$output_file"
