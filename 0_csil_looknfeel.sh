@@ -7,9 +7,14 @@ read -s key
 #key = $(cat .passwd)
 #echo $key
 
+# create .logs folder
+echo $key | sudo -S mkdir /usr/share/.logs
+echo $key | sudo -S chmod 777 /usr/share/.logs
+
+
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-output_file="~/csil-looknfeel-$timestamp.log"
+output_file="/usr/share/.logs/csil-looknfeel-$timestamp.log"
 ### | tee -a "$output_file"
 
 ### add repositories
