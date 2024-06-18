@@ -12,6 +12,15 @@ timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="~/csil-looknfeel-$timestamp.log"
 ### | tee -a "$output_file"
 
+### add repositories
+sudo add-apt-repository universe
+sudo add-apt-repository multiverse
+sudo add-apt-repository restricted
+
+#sudo add-apt-repository --remove universe
+#sudo add-apt-repository --remove multiverse
+#sudo add-apt-repository --remove restricted
+
 ### be sure most recent repository cache
 sudo apt update
 
@@ -55,6 +64,10 @@ echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 #wallpapers
 #source 3_csil--wallpaper
 
+#power and security
+gsettings set org.gnome.desktop.session idle-delay 9999
+gsettings set org.gnome.desktop.screensaver lock-delay 9999
+gsettings set org.gnome.desktop.screensaver lock-enabled false
 
 
 #cd /tmp << NOT NEEDED when cloning from github
