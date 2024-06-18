@@ -62,11 +62,15 @@ if [[ "$desktop_env" == "ubuntu:gnome" || "$desktop_env" == "GNOME" || "$desktop
   update_gnome_wallpaper  
 
 # Check for XFCE
-elif [[ "$desktop_env" == "XFCE" || "$desktop_env" == "xfce" ]]; then
-  echo "Detected XFCE desktop" | sudo -S tee -a "$output_file"
-  update_xfce_wallpapers "$wallpaper_path"
+#elif [[ "$desktop_env" == "XFCE" || "$desktop_env" == "xfce" ]]; then
+#  echo "Detected XFCE desktop" | sudo -S tee -a "$output_file"
+#  update_xfce_wallpapers "$wallpaper_path"
 
 else
-  echo "Desktop environment not supported: $desktop_env" | sudo -S tee -a "$output_file"
+  echo "xfce4-session" | tee ~/.xsession
+  sleep 5
+  
+  update_xfce_wallpapers "$wallpaper_path"
+  echo "Presuming XFCE"
 fi
 
