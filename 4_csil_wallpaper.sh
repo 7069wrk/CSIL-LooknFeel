@@ -13,7 +13,7 @@ sleep 5
 echo "# Installing the CSI WALLPAPER Theme..." | tee -a "$output_file"
 
 # Identify Desktop Environment (DE)
-desktop_env=$(echo "${XDG_CURRENT_DESKTOP}")  #| tr '[[:upper:]]' '[[:lower:]]')
+desktop_env=$(echo "${XDG_CURRENT_DESKTOP}")  | tr '[[:upper:]]' '[[:lower:]]')
 wallpaper_path="/opt/csitools/wallpaper/CSI-Linux-Dark-logo.jpg"
 
 # Function to change wallpaper for GNOME
@@ -57,12 +57,12 @@ update_xfce_wallpapers() {
 }
 
 # Check for GNOME
-if [[ "$desktop_env" == "GNOME" ]]; then
+if [[ "$desktop_env" == "ubuntu:gnome" || "$desktop_env" == "GNOME" || "$desktop_env" == "ubuntu:GNOME" ]]; then
   echo "Detected GNOME desktop"
   update_gnome_wallpaper  
 
 # Check for XFCE
-elif [[ "$desktop_env" == "XFCE" ]]; then
+elif [[ "$desktop_env" == "XFCE" || "$desktop_env" == "xfce" ]]; then
   echo "Detected XFCE desktop"
   update_xfce_wallpapers "$wallpaper_path"
 
