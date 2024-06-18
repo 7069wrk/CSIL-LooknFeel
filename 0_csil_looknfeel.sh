@@ -42,8 +42,19 @@ echo "installing UTILS" | tee -a "$output_file"
 sudo apt install -y aria2 bpytop yad zenity dos2unix
 sleep 5
 echo "installing DESKTOP TRANSFORMATIONS" | tee -a "$output_file"
-sudo apt install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop
+#sudo apt install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop
 #sudo apt install -y tasksel xubuntu-desktop task-xfce-desktop
+### XFCE minimalist install
+sudo apt install -y libxfce4ui-utils \
+    thunar \
+    xfce4-appfinder \
+    xfce4-panel \
+    xfce4-session \
+    xfce4-settings \
+    xfce4-terminal \
+    xfconf \
+    xfdesktop4 \
+    xfwm4
 sudo apt install -y figlet
 sleep 5
 echo "installing SLIM" | tee -a "$output_file"
