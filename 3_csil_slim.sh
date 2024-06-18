@@ -6,7 +6,7 @@ read -s key
 
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-output_file="csil_slim-$timestamp.log"
+output_file="~/csil_slim-$timestamp.log"
 ### | tee -a "$output_file"
 
 echo "Add LOGIN to CSI Theme..." | tee -a "$output_file"
