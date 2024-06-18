@@ -4,11 +4,16 @@ echo "Add WALLPAPER to CSI Theme..." #| tee -a "$output_file"
 #tar_file="csi_wallpaper.tar"
 #echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
+# LOG FOR NEW CSIL SYSTEM
+timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
+output_file="/usr/share/.logs/csil_wallpaper-$timestamp.log"
+### | tee -a "$output_file"
+
 sleep 5
-echo "# Installing the CSI WALLPAPER Theme..." #| tee -a "$output_file"
+echo "# Installing the CSI WALLPAPER Theme..." | tee -a "$output_file"
 
 # Identify Desktop Environment (DE)
-desktop_env=$(echo "${XDG_CURRENT_DESKTOP}") # | tr '[[:upper:]]' '[[:lower:]]')
+desktop_env=$(echo "${XDG_CURRENT_DESKTOP}")  #| tr '[[:upper:]]' '[[:lower:]]')
 wallpaper_path="/opt/csitools/wallpaper/CSI-Linux-Dark-logo.jpg"
 
 # Function to change wallpaper for GNOME
