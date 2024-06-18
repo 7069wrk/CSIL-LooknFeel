@@ -27,9 +27,10 @@ sudo apt install -y p7zip-full p7zip-rar zip
 echo "installing UTILS"
 sudo apt install -y aria2 bpytop yad zenity dos2unix
 sleep 5
-echo "installing DESKTOP STUFF"
-#sudo apt install -y xfce4 xfce4-goodies gvfs-backends dbus-x11
-sudo apt install -y tasksel xubuntu-desktop task-xfce-desktop
+echo "installing DESKTOP TRANSFORMATIONS"
+sudo apt install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop
+#sudo apt install -y tasksel xubuntu-desktop task-xfce-desktop
+sudo apt install -y figlet
 sleep 5
 echo "installing SLIM"
 sudo apt install -y slim
