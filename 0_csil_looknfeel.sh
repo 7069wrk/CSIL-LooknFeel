@@ -13,9 +13,9 @@ output_file="~/csil-looknfeel-$timestamp.log"
 ### | tee -a "$output_file"
 
 ### add repositories
-sudo add-apt-repository universe
-sudo add-apt-repository multiverse
-sudo add-apt-repository restricted
+sudo add-apt-repository universe -y
+sudo add-apt-repository multiverse -y
+sudo add-apt-repository restricted -y
 
 #sudo add-apt-repository --remove universe
 #sudo add-apt-repository --remove multiverse
