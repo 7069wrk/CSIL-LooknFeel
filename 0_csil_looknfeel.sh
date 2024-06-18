@@ -51,7 +51,7 @@ sleep 5
 echo "installing DESKTOP TRANSFORMATIONS" | tee -a "$output_file"
 #sudo apt install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop
 #sudo apt install -y tasksel xubuntu-desktop task-xfce-desktop
-sudo apt-get install xfce4 xfce4-goodies dbus-x11 task-xfce-desktop --no-install-recommends
+sudo apt-get install -y xfce4 xfce4-goodies dbus-x11 task-xfce-desktop --no-install-recommends
 ### XFCE minimalist install
 #sudo -S apt install -y libxfce4ui-utils \
 #    thunar \
@@ -85,7 +85,7 @@ echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
 ### kickstart XFCE
 sudo -k
-echo "xfce4-session" | tee .xsession
+#echo "xfce4-session" | tee .xsession
 
 #bootloader
 #source 0_csil-bootloader
