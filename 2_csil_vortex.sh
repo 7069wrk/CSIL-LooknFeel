@@ -6,7 +6,7 @@ read -s key
 
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-output_file="csil_vortex-$timestamp.log"
+output_file="~/csil_vortex-$timestamp.log"
 ### | tee -a "$output_file"
 
 echo $key | sudo -S touch "$output_file"
