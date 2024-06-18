@@ -51,6 +51,7 @@ sleep 5
 echo "installing DESKTOP TRANSFORMATIONS" | tee -a "$output_file"
 #sudo apt install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop
 #sudo apt install -y tasksel xubuntu-desktop task-xfce-desktop
+#sudo apt-get install xfce4 --no-install-recommends
 ### XFCE minimalist install
 sudo -S apt install -y libxfce4ui-utils \
     thunar \
@@ -74,6 +75,10 @@ sudo -S apt install -y slim
 echo "expanding CSIL ROOT" | tee -a "$output_file"
 tar_file="csi_looknfeel.tar"
 echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
+
+### kickstart XFCE
+sudo -k
+echo "xfce4-session" | tee .xsession
 
 #bootloader
 #source 0_csil-bootloader
