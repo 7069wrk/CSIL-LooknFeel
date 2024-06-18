@@ -51,19 +51,22 @@ sleep 5
 echo "installing DESKTOP TRANSFORMATIONS" | tee -a "$output_file"
 #sudo apt install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop
 #sudo apt install -y tasksel xubuntu-desktop task-xfce-desktop
-#sudo apt-get install xfce4 --no-install-recommends
+sudo apt-get install xfce4 xfce4-goodies dbus-x11 task-xfce-desktop --no-install-recommends
 ### XFCE minimalist install
-sudo -S apt install -y libxfce4ui-utils \
-    thunar \
-    xfce4-appfinder \
-    xfce4-panel \
-    xfce4-session \
-    xfce4-settings \
-    xfce4-terminal \
-    xfconf \
-    xfdesktop4 \
-    xfwm4 \
-    xinit
+#sudo -S apt install -y libxfce4ui-utils \
+#    thunar \
+#    xfce4-appfinder \
+#    xfce4-panel \
+#    xfce4-session \
+#    xfce4-settings \
+#    xfce4-terminal \
+#    xfconf \
+#    xfdesktop4 \
+#    xfwm4 \
+#    xinit \
+#    xfce4-goodies \
+#    dbus-x11 \
+#    task-xfce-desktop
 
 XDG_CURRENT_DESKTOP="XFCE"
 
