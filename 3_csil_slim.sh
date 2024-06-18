@@ -14,10 +14,10 @@ echo "Add LOGIN to CSI Theme..." | tee -a "$output_file"
 #echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
 # Check root privileges
-if [[ $(id -u) != 0 ]] ; then
-  echo "This script must be run with root privileges."
-  exit 1
-fi
+#if [[ $(id -u) != 0 ]] ; then
+#  echo "This script must be run with root privileges."
+#  exit 1
+#fi
 
 # Update package list
 #apt update
@@ -70,11 +70,11 @@ if [[ -f /etc/slim.conf.org ]]; then
 else
   # No backup found, create a backup before overwriting
   echo "Creating backup of /etc/slim.conf as /etc/slim.conf.org"
-  cp -v /etc/slim.conf /etc/slim.conf.org
+  echo $key | sudo -S mv -v /etc/slim.conf /etc/slim.conf.org
   echo "$CUSTOM_CONFIG" > /etc/slim.conf
 fi
 
 # Restart SLIM service (optional)
-systemctl restart slim
+#systemctl restart slim
 
 echo "SLIM installed and new configuration file created."
