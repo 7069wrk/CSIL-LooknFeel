@@ -13,7 +13,7 @@ sleep 5
 echo "# Installing the CSI WALLPAPER Theme..." | tee -a "$output_file"
 
 # Identify Desktop Environment (DE)
-desktop_env=$(echo "${XDG_CURRENT_DESKTOP}")  | tr '[[:upper:]]' '[[:lower:]]')
+desktop_env=$(echo "${XDG_CURRENT_DESKTOP}" | tr '[[:upper:]]' '[[:lower:]]')
 wallpaper_path="/opt/csitools/wallpaper/CSI-Linux-Dark-logo.jpg"
 
 # Function to change wallpaper for GNOME
