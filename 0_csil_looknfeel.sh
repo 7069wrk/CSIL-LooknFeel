@@ -9,7 +9,7 @@ read -s key
 
 # create .logs folder
 echo $key | sudo -S mkdir /usr/share/.logs
-echo $key | sudo -S chmod 777 /usr/share/.logs
+echo $key | sudo -S chmod 7777 /usr/share/.logs
 
 
 # LOG FOR NEW CSIL SYSTEM
