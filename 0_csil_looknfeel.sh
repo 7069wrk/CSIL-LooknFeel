@@ -7,6 +7,9 @@ read -s key
 #key = $(cat .passwd)
 #echo $key
 
+# enter sudo
+#echo $key | sudo -s
+
 # create .logs folder
 echo $key | sudo -S mkdir /usr/share/.logs
 echo $key | sudo -S chmod 7777 /usr/share/.logs
@@ -16,18 +19,22 @@ echo $key | sudo -S chmod 7777 /usr/share/.logs
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="/usr/share/.logs/csil-looknfeel-$timestamp.log"
 ### | tee -a "$output_file"
+sudo -S touch "$output_file"
 
 ### add repositories
-sudo add-apt-repository universe -y | tee -a "$output_file"
-sudo add-apt-repository multiverse -y | tee -a "$output_file"
-sudo add-apt-repository restricted -y | tee -a "$output_file"
+echo "add UNIVERSE" | tee -a "$output_file"
+sudo add-apt-repository universe -y 
+echo "add MULTIVERSE" | tee -a "$output_file"
+sudo add-apt-repository multiverse -y
+echo "add RESTRICTED" | tee -a "$output_file"
+sudo add-apt-repository restricted -y
 
 #sudo add-apt-repository --remove universe
 #sudo add-apt-repository --remove multiverse
 #sudo add-apt-repository --remove restricted
 
 ### be sure most recent repository cache
-sudo apt update
+#sudo apt update
 
 ### install build dependencies
 echo "Installing VM TOOLS" | tee -a "$output_file"
@@ -45,7 +52,7 @@ echo "installing DESKTOP TRANSFORMATIONS" | tee -a "$output_file"
 #sudo apt install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop
 #sudo apt install -y tasksel xubuntu-desktop task-xfce-desktop
 ### XFCE minimalist install
-sudo apt install -y libxfce4ui-utils \
+sudo -S apt install -y libxfce4ui-utils \
     thunar \
     xfce4-appfinder \
     xfce4-panel \
@@ -55,10 +62,10 @@ sudo apt install -y libxfce4ui-utils \
     xfconf \
     xfdesktop4 \
     xfwm4
-sudo apt install -y figlet
+sudo -S apt install -y figlet
 sleep 5
 echo "installing SLIM" | tee -a "$output_file"
-sudo apt install -y slim
+sudo -S apt install -y slim
 
 ### git the repository
 #echo $key | sudo -S git clone https://github.com/7069wrk/CSIL-LooknFeel.git
