@@ -7,10 +7,10 @@ echo "Add WALLPAPER to CSI Theme..." #| tee -a "$output_file"
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="/usr/share/.logs/csil_wallpaper-$timestamp.log"
-### | tee -a "$output_file"
+### | sudo -S tee -a "$output_file"
 
 sleep 5
-echo "# Installing the CSI WALLPAPER Theme..." | tee -a "$output_file"
+echo "# Installing the CSI WALLPAPER Theme..." | sudo -S tee -a "$output_file"
 
 # Identify Desktop Environment (DE)
 desktop_env=$(echo "${XDG_CURRENT_DESKTOP}" | tr '[[:upper:]]' '[[:lower:]]')
@@ -18,7 +18,7 @@ wallpaper_path="/opt/csitools/wallpaper/CSI-Linux-Dark-logo.jpg"
 
 # Function to change wallpaper for GNOME
 update_gnome_wallpaper() {
-  echo "inside  GNOME file://$wallpaper_path"
+  #echo "inside  GNOME file://$wallpaper_path"
   gsettings set org.gnome.desktop.background color-shading-type 'solid'
   gsettings set org.gnome.desktop.background primary-color '#000000'
   gsettings set org.gnome.desktop.background picture-options 'spanned'
@@ -37,7 +37,7 @@ update_xfce_wallpapers() {
         return 1  # Exit the function if no wallpaper path is provided
     fi
     if [ ! -f "$wallpaper_path" ]; then
-        echo "The specified wallpaper file does not exist: $wallpaper_path"
+        echo "The specified wallpaper file does not exist: $wallpaper_path" | sudo -S tee -a "$output_file"
         return 1  # Exit the function if the wallpaper file doesn't exist
     fi
     xsetroot -solid black
@@ -49,7 +49,7 @@ update_xfce_wallpapers() {
             for workspace in $workspaces; do
                 # Construct the property path
                 property_path="/backdrop/${screen}/${monitor}/${workspace}/last-image"
-                echo "Updating wallpaper for ${property_path} to ${wallpaper_path}"
+                echo "Updating wallpaper for ${property_path} to ${wallpaper_path}" | 
                 xfconf-query -c xfce4-desktop -p "${property_path}" -n -t string -s "${wallpaper_path}"
             done
         done
@@ -58,15 +58,15 @@ update_xfce_wallpapers() {
 
 # Check for GNOME
 if [[ "$desktop_env" == "ubuntu:gnome" || "$desktop_env" == "GNOME" || "$desktop_env" == "ubuntu:GNOME" ]]; then
-  echo "Detected GNOME desktop"
+  echo "Detected GNOME desktop" | sudo -S tee -a "$output_file"
   update_gnome_wallpaper  
 
 # Check for XFCE
 elif [[ "$desktop_env" == "XFCE" || "$desktop_env" == "xfce" ]]; then
-  echo "Detected XFCE desktop"
+  echo "Detected XFCE desktop" | sudo -S tee -a "$output_file"
   update_xfce_wallpapers "$wallpaper_path"
 
 else
-  echo "Desktop environment not supported: $desktop_env"
+  echo "Desktop environment not supported: $desktop_env" | sudo -S tee -a "$output_file"
 fi
 
