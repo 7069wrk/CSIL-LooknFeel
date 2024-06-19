@@ -7,6 +7,7 @@ echo "Add WALLPAPER to CSI Theme..." #| tee -a "$output_file"
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="/usr/share/.logs/csil_wallpaper-$timestamp.log"
+touch "$output_file"
 ### | sudo -S tee -a "$output_file"
 
 sleep 5
