@@ -17,7 +17,7 @@ echo $key | sudo -S chmod 7777 /usr/share/.logs
 
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-output_file="/usr/share/.logs/csil-looknfeel-$timestamp.log"
+output_file="$HOME/csil-looknfeel-$timestamp.log"
 ### | tee -a "$output_file"
 sudo -S touch "$output_file"
 
@@ -51,7 +51,7 @@ sleep 5
 echo "installing DESKTOP TRANSFORMATIONS" | tee -a "$output_file"
 #sudo apt install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop
 #sudo apt install -y tasksel xubuntu-desktop task-xfce-desktop
-sudo apt-get install -y xfce4 xfce4-goodies dbus-x11 task-xfce-desktop --no-install-recommends
+sudo apt-get install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop --no-install-recommends
 ### XFCE minimalist install
 #sudo -S apt install -y libxfce4ui-utils \
 #    thunar \
