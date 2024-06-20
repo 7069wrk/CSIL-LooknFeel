@@ -67,6 +67,18 @@ sudo apt-get install -y xfce4 xfce4-goodies dbus-x11 task-xfce-desktop --no-inst
 #    xfce4-goodies \
 #    dbus-x11 \
 #    task-xfce-desktop
+sudo apt install -y dmz-cursor-theme \
+elementary-xfce-icon-theme \
+famfamfam-flag-png \
+fonts-dejavu-core \
+fonts-freefont-ttf \
+fonts-noto-hinted \
+fonts-opensymbol \
+fonts-symbola \
+fonts-ubuntu \
+greybird-gtk-theme \
+plymouth-theme-spinner \
+plymouth-theme-ubuntu-text
 
 XDG_CURRENT_DESKTOP="XFCE"
 
