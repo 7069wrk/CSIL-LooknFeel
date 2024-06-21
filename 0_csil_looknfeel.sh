@@ -20,28 +20,28 @@ touch "$output_file"
 
 ### add repositories
 echo "add UNIVERSE" | tee -a "$output_file"
-sudo add-apt-repository universe -y 
+echo $key | sudo -S add-apt-repository universe -y 
 echo "add MULTIVERSE" | tee -a "$output_file"
-sudo add-apt-repository multiverse -y
+echo $key | sudo -S add-apt-repository multiverse -y
 echo "add RESTRICTED" | tee -a "$output_file"
-sudo add-apt-repository restricted -y
+echo $key | sudo -S add-apt-repository restricted -y
 
 ### install build dependencies
 echo "Installing VM TOOLS" | tee -a "$output_file"
-sudo apt install -y open-vm-tools open-vm-tools-desktop
+echo $key | sudo -S apt install -y open-vm-tools open-vm-tools-desktop
 echo "installing PYTHON STUFF" | tee -a "$output_file"
-sudo apt install -y python3 python3-pip python3-venv python3-update-manager
+echo $key | sudo -S apt install -y python3 python3-pip python3-venv python3-update-manager
 echo "installing FILE TRANSPORTATION" | tee -a "$output_file"
-sudo apt install -y git curl wget
+echo $key | sudo -S apt install -y git curl wget
 echo "installing COMPRESSION UTILITIES" | tee -a "$output_file"
-sudo apt install -y p7zip-full p7zip-rar zip
+echo $key | sudo -S apt install -y p7zip-full p7zip-rar zip
 echo "installing UTILS" | tee -a "$output_file"
-sudo apt install -y aria2 bpytop yad zenity dos2unix
+echo $key | sudo -S apt install -y aria2 bpytop yad zenity dos2unix
 sleep 5
 echo "installing DESKTOP TRANSFORMATIONS" | tee -a "$output_file"
-sudo apt-get install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop --no-install-recommends
+echo $key | sudo -S apt-get install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop --no-install-recommends
 
-sudo apt install -y dmz-cursor-theme \
+echo $key | sudo -S apt install -y dmz-cursor-theme \
 elementary-xfce-icon-theme \
 famfamfam-flag-png \
 fonts-dejavu-core \
@@ -56,10 +56,10 @@ plymouth-theme-ubuntu-text
 
 XDG_CURRENT_DESKTOP="XFCE"
 
-sudo -S apt install -y figlet
+echo $key | sudo -S apt install -y figlet
 sleep 5
 echo "installing SLIM" | tee -a "$output_file"
-sudo -S apt install -y slim
+echo $key | sudo -S apt install -y slim
 
 ### restore to root
 echo "expanding CSIL ROOT" | tee -a "$output_file"
