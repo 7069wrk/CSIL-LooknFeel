@@ -93,7 +93,7 @@ source 5_csil_terminal
 
 #power and security
 echo "removing screen and power LOCKS" | tee -a "$output_file"
-sudo -k
+echo $key | sudo -k
 gsettings set org.gnome.desktop.session idle-delay 9999
 gsettings set org.gnome.desktop.screensaver lock-delay 9999
 gsettings set org.gnome.desktop.screensaver lock-enabled false
