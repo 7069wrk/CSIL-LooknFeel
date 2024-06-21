@@ -6,8 +6,9 @@ echo "Add WALLPAPER to CSI Theme..." #| tee -a "$output_file"
 
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-output_file="/usr/share/.logs/csil_wallpaper-$timestamp.log"
+output_file="$HOME/csil_wallpaper-$timestamp.log"
 touch "$output_file"
+echo $key | sudo -S chmod 7777 "$output_file"
 ### | sudo -S tee -a "$output_file"
 
 sleep 5
@@ -67,11 +68,47 @@ if [[ "$desktop_env" == "ubuntu:gnome" || "$desktop_env" == "GNOME" || "$desktop
 #  echo "Detected XFCE desktop" | sudo -S tee -a "$output_file"
 #  update_xfce_wallpapers "$wallpaper_path"
 
-else
-  echo "xfce4-session" | tee ~/.xsession
-  sleep 5
-  
+else 
   update_xfce_wallpapers "$wallpaper_path"
   echo "Presuming XFCE"
+fi
+
+sleep 5
+echo "xfce4-session" | tee ~/.xsession
+
+sleep 5
+
+# Define custom configuration content (replace with your actual configuration)
+CUSTOM_CONFIG=$(cat <<EOF
+[org.freedesktop.DisplayManager.AccountsService]
+BackgroundFile='/opt/csitools/wallpaper/CSI-Linux-Dark-logo.jpg'
+[User]
+Session=
+XSession=xfce
+Background=/opt/csitools/wallpaper/CSI-Linux-Dark.jpg
+Icon=/var/lib/AccountsService/icons/csi
+SystemAccount=false
+[InputSource0]
+xkb=us
+EOF
+)
+
+
+# Check if custom config content is empty
+if [[ -z "$CUSTOM_CONFIG" ]]; then
+  echo "Custom configuration is empty. Please define content."
+  exit 1
+fi
+
+# Check if backup file exists
+if [[ -f /var/lib/AccountsService/users/csi ]]; then
+  # Backup already exists, overwrite slim.conf
+  echo "Existing backup found, overwriting /etc/slim.conf"
+  echo "$CUSTOM_CONFIG" > /var/lib/AccountsService/users/csi
+else
+  # No backup found, create a backup before overwriting
+  echo "Creating backup of /etc/slim.conf as /etc/slim.conf.org"
+  echo $key | sudo -S mv -v /var/lib/AccountsService/users/csi /var/lib/AccountsService/users/csi.org
+  echo "$CUSTOM_CONFIG" > /var/lib/AccountsService/users/csi
 fi
 
