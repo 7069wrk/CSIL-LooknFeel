@@ -1,14 +1,27 @@
 #!/bin/bash
 
 # GET SUDO
-echo "Please enter your sudo password:"
-read -s key
+#echo "Please enter your sudo password:"
+#read -s key
+
+# Password file path
+password_file=".passwd"
+
+# Read password securely (avoid storing in script)
+if [[ -f "$password_file" ]]; then
+  # Read first line of password file (assuming password is on the first line)
+  key=$(head -n 1 "$password_file")
+  echo $key
+else
+  echo "Password file not found: $password_file"
+  exit 1  # Script exits with error (no password)
+fi
 
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-output_file="$HOME/csil_slim-$timestamp.log"
+output_file="$csil_slim-$timestamp.log"
 touch "$output_file"
-echo $key | sudo -S chmod 7777 "$output_file"### | tee -a "$output_file"
+#echo $key | sudo -S chmod 7777 "$output_file"### | tee -a "$output_file"
 
 echo "Add LOGIN to CSI Theme..." | tee -a "$output_file"
 #tar_file="csi_looknfeel.tar"
