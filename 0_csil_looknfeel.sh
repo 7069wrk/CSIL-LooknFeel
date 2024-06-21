@@ -18,8 +18,10 @@ echo $key | sudo -S chmod 7777 /usr/share/.logs
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="$HOME/csil-looknfeel-$timestamp.log"
+touch "$output_file"
+echo $key | sudo -S chmod 7777 "$output_file"
 ### | tee -a "$output_file"
-sudo -S touch "$output_file"
+#sudo -S touch "$output_file"
 
 ### add repositories
 echo "add UNIVERSE" | tee -a "$output_file"
