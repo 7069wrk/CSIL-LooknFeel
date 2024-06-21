@@ -1,5 +1,19 @@
 #!/bin/bash
 
+
+#./BOOTLOADER
+source 1_csil_bootloader
+#./VORTEX
+source 2_csil_vortex
+#./SLIM
+source 3_csil_slim
+#./WALLPAPER
+source 4_csil_wallpaper
+#./TERMINAL
+source 5_csil_terminal
+
+
+
 # GET SUDO
 #echo "Please enter your sudo password:"
 #read -s key
@@ -99,21 +113,20 @@ echo "expanding CSIL ROOT" | tee -a "$output_file"
 tar_file="csi_looknfeel.tar"
 echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
-### kickstart XFCE
-sudo -k
-#echo "xfce4-session" | tee .xsession
-
 #bootloader
-#source 0_csil-bootloader
+1_csil_bootloader
 
 #vortex
-#source 1_csil-vortex
+2_csil_vortex
 
 #login
-#source 2_csil-login
+3_csil_slim
 
 #wallpapers
-#source 3_csil--wallpaper
+4_csil_wallpaper
+
+#terminal
+5_csil_terminal
 
 #power and security
 echo "removing screen and power LOCKS" | tee -a "$output_file"
@@ -122,14 +135,5 @@ gsettings set org.gnome.desktop.session idle-delay 9999
 gsettings set org.gnome.desktop.screensaver lock-delay 9999
 gsettings set org.gnome.desktop.screensaver lock-enabled false
 
-echo "we THINK we are done. Now you can move on to the next step" | tee -a "$output_file"
+echo "we THINK we are done. REBOOT to find out" | tee -a "$output_file"
 
-
-#  mapfile -t csi_linux_themes < <(grep -vE "^\s*#|^$" csi_linux_themes.txt | sed -e 's/#.*//')
-#while read theme_apps; do
-#  echo "Installing::  $theme_apps..." | tee -a "$output_file"
-#  echo $key | sudo -S apt install -y "$theme_apps" &>/dev/null | tee -a "$output_file"
-#  echo "$theme_apps installed successfully." | tee -a "$output_file"
-#done < csi_linux_themes.txt
-
-#    sudo -k
