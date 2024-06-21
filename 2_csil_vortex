@@ -64,5 +64,4 @@ fi
 echo "[done]" | tee -a "$output_file"
 
 echo "CSILinux Vortex is your plymouth theme now :)" | tee -a "$output_file"
-
-exit 0
+#exit 0
