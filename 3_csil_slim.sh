@@ -6,9 +6,9 @@ read -s key
 
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-output_file="/usr/share/.logs/csil_slim-$timestamp.log"
+output_file="$HOME/csil_slim-$timestamp.log"
 touch "$output_file"
-### | tee -a "$output_file"
+echo $key | sudo -S chmod 7777 "$output_file"### | tee -a "$output_file"
 
 echo "Add LOGIN to CSI Theme..." | tee -a "$output_file"
 #tar_file="csi_looknfeel.tar"
