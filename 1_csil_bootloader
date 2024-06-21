@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# GET SUDO
-#echo "Please enter your sudo password:"
-#read -s key
-
 # Password file path
 password_file=".passwd"
 
@@ -22,10 +18,6 @@ timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="csil_bootloader-$timestamp.log"
 touch "$output_file"
 #echo $key | sudo -S chmod 7777 "$output_file"### | tee -a "$output_file"
-
-echo "# Restore the backup of CSI Theme..." | tee -a "$output_file"
-#tar_file="csi_boot.tar"
-#echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
 sleep 5
 echo "# Installing the CSI BOOTLOADER Theme..." | tee -a "$output_file"
