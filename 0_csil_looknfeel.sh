@@ -120,7 +120,7 @@ gsettings set org.gnome.desktop.session idle-delay 9999
 gsettings set org.gnome.desktop.screensaver lock-delay 9999
 gsettings set org.gnome.desktop.screensaver lock-enabled false
 
-echo "we thing we are done now you can move on to the next step" | tee -a "$output_file"
+echo "we THINK we are done. Now you can move on to the next step" | tee -a "$output_file"
 
 
 #  mapfile -t csi_linux_themes < <(grep -vE "^\s*#|^$" csi_linux_themes.txt | sed -e 's/#.*//')
