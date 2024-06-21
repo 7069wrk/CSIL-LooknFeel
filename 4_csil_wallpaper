@@ -81,6 +81,7 @@ if [[ "$desktop_env" == "ubuntu:gnome" || "$desktop_env" == "GNOME" || "$desktop
 #  update_xfce_wallpapers "$wallpaper_path"
 
 else
+  XDG_CURRENT_DESKTOP="XFCE"
   update_xfce_wallpapers "$wallpaper_path"
   echo "Presuming XFCE"
 fi
