@@ -1,19 +1,5 @@
 #!/bin/bash
 
-
-#./BOOTLOADER
-source 1_csil_bootloader
-#./VORTEX
-source 2_csil_vortex
-#./SLIM
-source 3_csil_slim
-#./WALLPAPER
-source 4_csil_wallpaper
-#./TERMINAL
-source 5_csil_terminal
-
-
-
 # GET SUDO
 #echo "Please enter your sudo password:"
 #read -s key
@@ -114,19 +100,29 @@ tar_file="csi_looknfeel.tar"
 echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
 
 #bootloader
-1_csil_bootloader
+echo "Running BOOTLOADER script"
+source 1_csil_bootloader
+#1_csil_bootloader
 
 #vortex
-2_csil_vortex
+echo "Running VORTEX script"
+source 2_csil_vortex
+#2_csil_vortex
 
 #login
-3_csil_slim
+echo "Running SLIM script"
+source 3_csil_slim
+#3_csil_slim
 
 #wallpapers
-4_csil_wallpaper
+echo "Running WALLPAPER script"
+source 4_csil_wallpaper
+#4_csil_wallpaper
 
 #terminal
-5_csil_terminal
+echo "Running the TERMINAL script"
+source 5_csil_terminal
+#5_csil_terminal
 
 #power and security
 echo "removing screen and power LOCKS" | tee -a "$output_file"
