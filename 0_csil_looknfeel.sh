@@ -1,25 +1,27 @@
 #!/bin/bash
 
 # GET SUDO
-echo "Please enter your sudo password:"
-read -s key
+#echo "Please enter your sudo password:"
+#read -s key
 
-#key = $(cat .passwd)
-#echo $key
+# Password file path
+password_file=".passwd"
 
-# enter sudo
-#echo $key | sudo -s
-
-# create .logs folder
-echo $key | sudo -S mkdir /usr/share/.logs
-echo $key | sudo -S chmod 7777 /usr/share/.logs
-
+# Read password securely (avoid storing in script)
+if [[ -f "$password_file" ]]; then
+  # Read first line of password file (assuming password is on the first line)
+  key=$(head -n 1 "$password_file")
+  echo $key
+else
+  echo "Password file not found: $password_file"
+  exit 1  # Script exits with error (no password)
+fi
 
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-output_file="$HOME/csil-looknfeel-$timestamp.log"
+output_file="csil-looknfeel-$timestamp.log"
 touch "$output_file"
-echo $key | sudo -S chmod 7777 "$output_file"
+#echo $key | sudo -S chmod 7777 "$output_file"
 ### | tee -a "$output_file"
 #sudo -S touch "$output_file"
 
