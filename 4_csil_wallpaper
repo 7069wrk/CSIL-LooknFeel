@@ -63,7 +63,7 @@ update_xfce_wallpapers() {
             for workspace in $workspaces; do
                 # Construct the property path
                 property_path="/backdrop/${screen}/${monitor}/${workspace}/last-image"
-                echo "Updating wallpaper for ${property_path} to ${wallpaper_path}" | 
+                echo "Updating wallpaper for ${property_path} to ${wallpaper_path}"
                 xfconf-query -c xfce4-desktop -p "${property_path}" -n -t string -s "${wallpaper_path}"
             done
         done
@@ -73,14 +73,14 @@ update_xfce_wallpapers() {
 # Check for GNOME
 if [[ "$desktop_env" == "ubuntu:gnome" || "$desktop_env" == "GNOME" || "$desktop_env" == "ubuntu:GNOME" ]]; then
   echo "Detected GNOME desktop" | sudo -S tee -a "$output_file"
-  update_gnome_wallpaper  
+  update_gnome_wallpaper
 
 # Check for XFCE
 #elif [[ "$desktop_env" == "XFCE" || "$desktop_env" == "xfce" ]]; then
 #  echo "Detected XFCE desktop" | sudo -S tee -a "$output_file"
 #  update_xfce_wallpapers "$wallpaper_path"
 
-else 
+else
   update_xfce_wallpapers "$wallpaper_path"
   echo "Presuming XFCE"
 fi
@@ -93,12 +93,14 @@ sleep 5
 # New content for the file
 new_content="[org.freedesktop.DisplayManager.AccountsService]
 BackgroundFile='/opt/csitools/wallpaper/CSI-Linux-Dark-logo.jpg'
+
 [User]
 Session=
 XSession=xfce
 Background=/opt/csitools/wallpaper/CSI-Linux-Dark.jpg
 Icon=/var/lib/AccountsService/icons/csi
 SystemAccount=false
+
 [InputSource0]
 xkb=us"
 
@@ -116,7 +118,7 @@ echo "$new_content" > "$temp_file"
 if [[ -f "$backup_path" ]]; then
   echo "Backup file already exists: $backup_path"
   # Overwrite the file directly (no backup created)
-  echo $key | sudo -S mv "$temp_file" "$file_path"  
+  echo $key | sudo -S mv "$temp_file" "$file_path"
   echo "File content overwritten successfully!"
 else
   # Create a backup with .org extension
