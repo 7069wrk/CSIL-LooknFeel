@@ -58,7 +58,7 @@ plymouth-theme-ubuntu-text
 
 echo $key | sudo -S apt install -y figlet
 sleep 5
-echo "installing SLIM" | tee -a "$output_file"
+echo "------------------------------================================>>>>>      installing SLIM" | tee -a "$output_file"
 echo $key | sudo -S apt install -y slim
 
 ### restore to root
