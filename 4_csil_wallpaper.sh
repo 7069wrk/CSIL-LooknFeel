@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# GET SUDO
+echo "Please enter your sudo password:"
+read -s key
+
 echo "Add WALLPAPER to CSI Theme..." #| tee -a "$output_file"
 #tar_file="csi_wallpaper.tar"
 #echo $key | sudo -S tar --overwrite -xpf "$tar_file" -C /
