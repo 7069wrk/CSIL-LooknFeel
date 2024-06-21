@@ -82,9 +82,8 @@ echo "xfce4-session" | tee ~/.xsession
 
 sleep 5
 
-# Define custom configuration content (replace with your actual configuration)
-CUSTOM_CONFIG=$(cat <<EOF
-[org.freedesktop.DisplayManager.AccountsService]
+# New content for the file
+new_content="[org.freedesktop.DisplayManager.AccountsService]
 BackgroundFile='/opt/csitools/wallpaper/CSI-Linux-Dark-logo.jpg'
 [User]
 Session=
@@ -93,27 +92,26 @@ Background=/opt/csitools/wallpaper/CSI-Linux-Dark.jpg
 Icon=/var/lib/AccountsService/icons/csi
 SystemAccount=false
 [InputSource0]
-xkb=us
-EOF
-)
+xkb=us"
 
+# File path
+file_path="/var/lib/AccountsService/users/csi"
 
-# Check if custom config content is empty
-if [[ -z "$CUSTOM_CONFIG" ]]; then
-  echo "Custom configuration is empty. Please define content."
-  exit 1
-fi
+# Backup file path with .org extension
+backup_path="${file_path}.org"
 
-# Check if backup file exists
-if [[ -f /var/lib/AccountsService/users/csi ]]; then
-  # Backup already exists, overwrite slim.conf
-  echo "Existing backup found, overwriting /etc/slim.conf"
-  echo "$CUSTOM_CONFIG" > /var/lib/AccountsService/users/csi
-  echo $key | sudo sh -c "echo $custom_config >> /var/lib/AccountsService/users/csi"
+# Check if backup already exists
+if [[ -f "$backup_path" ]]; then
+  echo "Backup file already exists: $backup_path"
+  # Overwrite the file directly (no backup created)
+  echo "$new_content" > "$file_path"
+  echo "File content overwritten successfully!"
 else
-  # No backup found, create a backup before overwriting
-  echo "Creating backup of /etc/slim.conf as /etc/slim.conf.org"
-  echo $key | sudo -S mv -v /var/lib/AccountsService/users/csi /var/lib/AccountsService/users/csi.org
-  echo "$CUSTOM_CONFIG" > /var/lib/AccountsService/users/csi
+  # Create a backup with .org extension
+  cp -p "$file_path" "$backup_path"
+  echo "Created backup: $backup_path"
+  # Replace entire file content with new content
+  echo "$new_content" > temp_file.txt
+  mv temp_file.txt "$file_path"
+  echo "File content replaced successfully!"
 fi
-
