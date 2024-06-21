@@ -28,7 +28,7 @@ echo $key | sudo -S git clone https://github.com/xero/figlet-fonts /usr/share/fi
 
 # edit .bashrc
 #exit sudo
-sudo -k
+echo $key | sudo -k
 
 #echo "figlet -f /usr/share/figlet/fonts/Digital -r \"CSI Linux\"" >> ~/.bashrc
 sed -i '$ a figlet -f /usr/share/figlet/fonts/Digital -r "CSI Linux"' ~/.bashrc
