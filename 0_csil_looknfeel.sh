@@ -10,7 +10,7 @@ if [[ -f "$password_file" ]]; then
   echo $key
 else
   echo "Password file not found: $password_file"
-  exit 1  # Script exits with error (no password)
+  exit 1  # Script exits with error (no password)sudo
 fi
 
 # LOG FOR NEW CSIL SYSTEM
@@ -54,7 +54,7 @@ greybird-gtk-theme \
 plymouth-theme-spinner \
 plymouth-theme-ubuntu-text
 
-XDG_CURRENT_DESKTOP="XFCE"
+#XDG_CURRENT_DESKTOP="XFCE"
 
 echo $key | sudo -S apt install -y figlet
 sleep 5
