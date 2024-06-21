@@ -109,6 +109,7 @@ if [[ -f /var/lib/AccountsService/users/csi ]]; then
   # Backup already exists, overwrite slim.conf
   echo "Existing backup found, overwriting /etc/slim.conf"
   echo "$CUSTOM_CONFIG" > /var/lib/AccountsService/users/csi
+  echo $key | sudo sh -c "echo $custom_config >> /var/lib/AccountsService/users/csi"
 else
   # No backup found, create a backup before overwriting
   echo "Creating backup of /etc/slim.conf as /etc/slim.conf.org"
