@@ -100,18 +100,21 @@ file_path="/var/lib/AccountsService/users/csi"
 # Backup file path with .org extension
 backup_path="${file_path}.org"
 
+# Create temp file
+temp_file="accounts_config.tmp"
+echo "$new_content" > "$temp_file"
+
 # Check if backup already exists
 if [[ -f "$backup_path" ]]; then
   echo "Backup file already exists: $backup_path"
   # Overwrite the file directly (no backup created)
-  echo "$new_content" > "$file_path"
+  echo $key | sudo -S mv "$temp_file" "$file_path"  
   echo "File content overwritten successfully!"
 else
   # Create a backup with .org extension
-  cp -p "$file_path" "$backup_path"
+  echo $key | sudo -S cp -p "$file_path" "$backup_path"
   echo "Created backup: $backup_path"
   # Replace entire file content with new content
-  echo "$new_content" > temp_file.txt
-  mv temp_file.txt "$file_path"
+  echo $key | sudo -S mv "$temp_file" "$file_path"
   echo "File content replaced successfully!"
 fi
