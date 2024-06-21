@@ -17,8 +17,6 @@ fi
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="csil_vortex-$timestamp.log"
 touch "$output_file"
-#echo $key | sudo -S chmod 7777 "$output_file"### | tee -a "$output_file"
-
 echo $key | sudo -S touch "$output_file"
 
 sleep 5
@@ -30,54 +28,35 @@ echo $key | sudo -S rm /etc/alternatives/default.plymouth
 
 sleep 5
 # adding csil-vortex in the list of aviable themes
-echo -n "updating plymouth themes alternatives   ........................   " | 
-tee -a "$output_file"
-echo $key | sudo -S update-alternatives --install /usr/share/plymouth/themes/def
-ault.plymouth default.plymouth /usr/share/plymouth/themes/csil-000/csil-000.plym
-outh 100 &>/dev/null
-echo $key | sudo -S update-alternatives --install /usr/share/plymouth/themes/def
-ault.plymouth default.plymouth /usr/share/plymouth/themes/csil-001/csil-001.plym
-outh 100 &>/dev/null
-echo $key | sudo -S update-alternatives --install /usr/share/plymouth/themes/def
-ault.plymouth default.plymouth /usr/share/plymouth/themes/vortex-ubuntu/vortex-u
-buntu.plymouth 100 &>/dev/null
+echo -n "updating plymouth themes alternatives   ........................   " | tee -a "$output_file"
+echo $key | sudo -S update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/csil-000/csil-000.plymouth 100 &>/dev/null
+echo $key | sudo -S update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/csil-001/csil-001.plymouth 100 &>/dev/null
+echo $key | sudo -S update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/vortex-ubuntu/vortex-ubuntu.plymouth 100 &>/dev/null
 if [ $? -gt 0 ]; then
-  echo -e "\nan error occurred installing alternative in /usr/share/plymouth/the
-mes/default.plymouth" | tee -a "$output_file"
-  exit 1
+  echo -e "\nan error occurred installing alternative in /usr/share/plymouth/themes/default.plymouth" | tee -a "$output_file"
 fi
 echo "[done]"
 
 # setting csil-vortex as default plymouth theme;
-echo -n "setting CSILinux Vortex as default plymouth theme   .................  
- " | tee -a "$output_file"
-#echo $key | sudo -S update-alternatives --set default.plymouth /usr/share/plymo
-uth/themes/csil-000/csil-000.plymouth  &> /dev/null;
-echo $key | sudo -S update-alternatives --set default.plymouth /usr/share/plymou
-th/themes/csil-001/csil-001.plymouth &>/dev/null;
-#echo $key | sudo -S update-alternatives --set default.plymouth /usr/share/plymo
-uth/themes/vortex-ubuntu/vortex-ubuntu.plymouth  &> /dev/null ;
-#echo $key | sudo -S update-alternatives --set default.plymouth /usr/share/plymo
-uth/themes/csil-003/csil-003.plymouth;
+echo -n "setting CSILinux Vortex as default plymouth theme   ................. " | tee -a "$output_file"
+#echo $key | sudo -S update-alternatives --set default.plymouth /usr/share/plymouth/themes/csil-000/csil-000.plymouth  &> /dev/null;
+echo $key | sudo -S update-alternatives --set default.plymouth /usr/share/plymouth/themes/csil-001/csil-001.plymouth &>/dev/null;
+#echo $key | sudo -S update-alternatives --set default.plymouth /usr/share/plymouth/themes/vortex-ubuntu/vortex-ubuntu.plymouth  &> /dev/null ;
+#echo $key | sudo -S update-alternatives --set default.plymouth /usr/share/plymouth/themes/csil-003/csil-003.plymouth;
 if [ $? -gt 0 ]; then
-  echo -e "\nan error occurred setting alternative in /usr/share/plymouth/themes
-/default.plymouth" | tee -a "$output_file"
-  exit 1
+  echo -e "\nan error occurred setting alternative in /usr/share/plymouth/themes/default.plymouth" | tee -a "$output_file"
 fi
 echo "[done]"
 
 #sudo update-alternatives --config default.plymouth
 
 # updating Initial RAM File System
-echo -n "updating Initial RAM File System   .............................   " | 
-tee -a "$output_file"
+echo -n "updating Initial RAM File System   .............................   " | tee -a "$output_file"
 echo $key | sudo -S update-initramfs -u &>/dev/null
 if [ $? -gt 0 ]; then
-  echo -e "\nan error occurred executing \"update-initramfs -u\"" | tee -a "$out
-put_file"
-  exit 1
+  echo -e "\nan error occurred executing \"update-initramfs -u\"" | tee -a "$output_file"
 fi
 echo "[done]" | tee -a "$output_file"
 
 echo "CSILinux Vortex is your plymouth theme now :)" | tee -a "$output_file"
-#exit 0
+
