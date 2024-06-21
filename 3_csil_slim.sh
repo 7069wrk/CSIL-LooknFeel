@@ -19,7 +19,7 @@ fi
 
 # LOG FOR NEW CSIL SYSTEM
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-output_file="$csil_slim-$timestamp.log"
+output_file="csil_slim-$timestamp.log"
 touch "$output_file"
 #echo $key | sudo -S chmod 7777 "$output_file"### | tee -a "$output_file"
 
