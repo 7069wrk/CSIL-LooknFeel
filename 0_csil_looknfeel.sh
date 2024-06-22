@@ -18,6 +18,8 @@ timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="csil-looknfeel-$timestamp.log"
 touch "$output_file"
 
+echo $key | sudo -S
+
 ### add repositories
 echo "add UNIVERSE" | tee -a "$output_file"
 echo $key | sudo -S add-apt-repository universe -y
@@ -59,7 +61,11 @@ XDG_CURRENT_DESKTOP="XFCE"
 echo $key | sudo -S apt install -y figlet
 sleep 5
 echo "-------------------------===========================>>>>>      installing SLIM" | tee -a "$output_file"
-echo $key | sudo -S apt install -y slim
+# passing the KEY causes failureecho $key | sudo -S apt install -y slim
+echo "lightdm	shared/default-x-display-manager	select	slim" | sudo debconf-set-selections
+echo "slim	shared/default-x-display-manager	select	slim" | sudo debconf-set-selections
+echo "slim	slim/daemon_name	string	/usr/bin/slim" | sudo debconf-set-selections
+DEBIAN_FRONTEND=noninteractive sudo -S apt install -y slim
 
 ### restore to root
 echo "expanding CSIL ROOT" | tee -a "$output_file"
