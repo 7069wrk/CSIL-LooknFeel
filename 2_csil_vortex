@@ -17,7 +17,7 @@ fi
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="csil_vortex-$timestamp.log"
 touch "$output_file"
-echo $key | sudo -S touch "$output_file"
+#echo $key | sudo -S touch "$output_file"
 
 sleep 5
 echo "# Installing the CSI VORTEX Theme..." | tee -a "$output_file"
