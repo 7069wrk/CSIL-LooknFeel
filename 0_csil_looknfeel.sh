@@ -18,8 +18,6 @@ timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 output_file="csil-looknfeel-$timestamp.log"
 touch "$output_file"
 
-echo $key | sudo -S
-
 ### add repositories
 echo "add UNIVERSE" | tee -a "$output_file"
 echo $key | sudo -S add-apt-repository universe -y
