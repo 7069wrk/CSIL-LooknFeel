@@ -10,7 +10,7 @@ if [[ -f "$password_file" ]]; then
   echo $key
 else
   echo "Password file not found: $password_file"
-  exit 1  # Script exits with error (no password)sudo
+  exit 1
 fi
 
 # LOG FOR NEW CSIL SYSTEM
@@ -20,7 +20,7 @@ touch "$output_file"
 
 ### add repositories
 echo "add UNIVERSE" | tee -a "$output_file"
-echo $key | sudo -S add-apt-repository universe -y 
+echo $key | sudo -S add-apt-repository universe -y
 echo "add MULTIVERSE" | tee -a "$output_file"
 echo $key | sudo -S add-apt-repository multiverse -y
 echo "add RESTRICTED" | tee -a "$output_file"
@@ -54,12 +54,11 @@ greybird-gtk-theme \
 plymouth-theme-spinner \
 plymouth-theme-ubuntu-text
 
-#XDG_CURRENT_DESKTOP="XFCE"
+XDG_CURRENT_DESKTOP="XFCE"
 
 echo $key | sudo -S apt install -y figlet
 sleep 5
-echo "------------------------------================================>>>>>      installing SLIM" | tee -a "$output_file"
-echo " RIGHT HERE is where things now go toes up.   unable to select option in DISPLAY MANAGER. but if i do it manually it works fine!!!"
+echo "-------------------------===========================>>>>>      installing SLIM" | tee -a "$output_file"
 echo $key | sudo -S apt install -y slim
 
 ### restore to root
