@@ -1,8 +1,6 @@
 #!/bin/bash
-
 # Password file path
 password_file=".passwd"
-
 # Read password securely (avoid storing in script)
 if [[ -f "$password_file" ]]; then
   # Read first line of password file (assuming password is on the first line)
@@ -59,4 +57,3 @@ fi
 echo "[done]" | tee -a "$output_file"
 
 echo "CSILinux Vortex is your plymouth theme now :)" | tee -a "$output_file"
-
