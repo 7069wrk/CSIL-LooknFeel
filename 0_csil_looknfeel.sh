@@ -61,8 +61,7 @@ sleep 5
 echo "-------------------------===========================>>>>>      installing SLIM" | tee -a "$output_file"
 # passing the KEY causes failureecho $key | sudo -S apt install -y slim
 sudo debconf-get-selections | grep slim > conf.txt
-DEBIAN_FRONTEND=noninteractive 
-sudo -S apt install -y slim
+DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true sudo -S apt install -y slim
 
 ### restore to root
 echo "expanding CSIL ROOT" | tee -a "$output_file"
