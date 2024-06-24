@@ -36,7 +36,7 @@ echo $key | sudo -S apt install -y git curl wget
 echo "installing COMPRESSION UTILITIES" | tee -a "$output_file"
 echo $key | sudo -S apt install -y p7zip-full p7zip-rar zip
 echo "installing UTILS" | tee -a "$output_file"
-echo $key | sudo -S apt install -y aria2 bpytop yad zenity dos2unix
+echo $key | sudo -S apt install -y aria2 bpytop yad zenity dos2unix debconf-utils
 sleep 5
 echo "installing DESKTOP TRANSFORMATIONS" | tee -a "$output_file"
 echo $key | sudo -S apt-get install -y xfce4 xfce4-goodies gvfs-backends dbus-x11 task-xfce-desktop --no-install-recommends
@@ -60,10 +60,9 @@ echo $key | sudo -S apt install -y figlet
 sleep 5
 echo "-------------------------===========================>>>>>      installing SLIM" | tee -a "$output_file"
 # passing the KEY causes failureecho $key | sudo -S apt install -y slim
-echo "lightdm	shared/default-x-display-manager	select	slim" | sudo debconf-set-selections
-echo "slim	shared/default-x-display-manager	select	slim" | sudo debconf-set-selections
-echo "slim	slim/daemon_name	string	/usr/bin/slim" | sudo debconf-set-selections
-DEBIAN_FRONTEND=noninteractive sudo -S apt install -y slim
+sudo debconf-get-selections | grep slim > conf.txt
+DEBIAN_FRONTEND=noninteractive 
+sudo -S apt install -y slim
 
 ### restore to root
 echo "expanding CSIL ROOT" | tee -a "$output_file"
