@@ -49,7 +49,15 @@ for user_dir in /home/* /root; do
     fi
 done
 
-echo "=== 6. FINAL TERMINAL RESET & SHUTDOWN ==="
+echo "=== 6. DISCARDING DELETED BLOCKS WITHOUT DISK EXPANSION ==="
+# fstrim tells the hypervisor which log blocks were deleted so they are dropped safely
+if command -v fstrim &> /dev/null; then
+    fstrim -v /
+else
+    echo "fstrim not available, skipping safely."
+fi
+
+echo "=== 7. FINAL TERMINAL RESET & SHUTDOWN ==="
 # Completely resets the current terminal screen buffer
 clear
 printf "\033c"
