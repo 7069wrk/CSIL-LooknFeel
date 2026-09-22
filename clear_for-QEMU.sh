@@ -49,12 +49,7 @@ for user_dir in /home/* /root; do
     fi
 done
 
-echo "=== 6. ZEROING FREE SPACE (PREVENTS WINDOWS-SIDE DATA RECOVERY) ==="
-# Overwrites deleted log space with zeros so it cannot be recovered via raw disk inspection
-dd if=/dev/zero of=/zero.small.file bs=1024k status=progress
-rm -f /zero.small.file
-
-echo "=== 7. FINAL TERMINAL RESET & SHUTDOWN ==="
+echo "=== 6. FINAL TERMINAL RESET & SHUTDOWN ==="
 # Completely resets the current terminal screen buffer
 clear
 printf "\033c"
