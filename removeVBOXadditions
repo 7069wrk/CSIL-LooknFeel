@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+#
+# Script to completely remove VirtualBox Guest Additions and tools.
+
+set -e
+
+# Ensure script is run as root
+if [ "$EUID" -ne 0 ]; then
+    echo "Error: This script must be run as root (use sudo)." >&2
+    exit 1
+fi
+
+echo "=== Starting VirtualBox Tools Removal ==="
+
+# 1. Run the official uninstaller if available
+if [ -f "/opt/VBoxGuestAdditions-uninstall.sh" ]; then
+    echo "[+] Found official installer script. Running uninstaller..."
+    /opt/VBoxGuestAdditions-uninstall.sh || true
+elif [ -f "/usr/sbin/ksmod-vboxguest" ]; then
+    echo "[+] Running vboxguest uninstaller..."
+    /usr/sbin/ksmod-vboxguest uninstall || true
+fi
+
+# 2. Stop and disable VirtualBox services
+echo "[+] Stopping VirtualBox services..."
+SERVICES=("vboxadd" "vboxadd-service" "vboxadd-x11" "virtualbox-guest-utils")
+for service in "${SERVICES[@]}"; do
+    if systemctl is-active --quiet "$service" 2>/dev/null; then
+        systemctl stop "$service" || true
+        systemctl disable "$service" 2>/dev/null || true
+        echo "    Stopped service: $service"
+    fi
+done
+
+# 3. Unload VirtualBox kernel modules
+echo "[+] Unloading VirtualBox kernel modules..."
+MODULES=("vboxsf" "vboxguest" "vboxvideo")
+for mod in "${MODULES[@]}"; do
+    if lsmod | grep -q "^$mod"; then
+        modprobe -r "$mod" 2>/dev/null || rmmod "$mod" 2>/dev/null || echo "    Could not unload $mod (may be in use)."
+    fi
+done
+
+# 4. Remove system package installations (Debian/Ubuntu & RHEL/Fedora/Arch)
+echo "[+] Removing VirtualBox guest package installations..."
+if command -v apt-get &>/dev/null; then
+    apt-get purge -y virtualbox-guest-utils virtualbox-guest-x11 virtualbox-guest-dkms || true
+    apt-get autoremove -y || true
+elif command -v dnf &>/dev/null; then
+    dnf remove -y virtualbox-guest-additions || true
+elif command -v yum &>/dev/null; then
+    yum remove -y virtualbox-guest-additions || true
+elif command -v pacman &>/dev/null; then
+    pacman -Rns --noconfirm virtualbox-guest-utils virtualbox-guest-modules-arch || true
+fi
+
+# 5. Clean up remaining files and directories
+echo "[+] Cleaning up VirtualBox files and directories..."
+FILES_TO_REMOVE=(
+    "/etc/init.d/vboxadd"
+    "/etc/init.d/vboxadd-service"
+    "/etc/init.d/vboxadd-x11"
+    "/usr/bin/VBoxClient"
+    "/usr/bin/VBoxControl"
+    "/usr/bin/VBoxService"
+    "/usr/sbin/vbox-greeter"
+    "/opt/VBoxGuestAdditions-*"
+    "/var/lib/VBoxGuestAdditions"
+    "/lib/modules/$(uname -r)/misc/vbox*"
+    "/lib/modules/$(uname -r)/extra/vbox*"
+)
+
+for target in "${FILES_TO_REMOVE[@]}"; do
+    rm -rf $target
+done
+
+# 6. Remove vboxadd user and group if they exist
+if id "vboxadd" &>/dev/null; then
+    echo "[+] Removing vboxadd user..."
+    userdel vboxadd || true
+fi
+
+if getent group "vboxsf" &>/dev/null; then
+    echo "[+] Removing vboxsf group..."
+    groupdel vboxsf || true
+fi
+
+echo "=== Removal Complete ==="
+echo "Note: A reboot is recommended to clear any lingering kernel modules."
